@@ -133,8 +133,9 @@ def updateFood(request):
 		for f in user:
 			user2 = f
 		if user2.role=="Sekretariat":
+			restoran_list = Restaurant.objects.all()
 			food_list = Food.objects.filter(id=request.POST.get("edit"))
-			context = {"food_list":food_list,}
+			context = {"food_list":food_list,"restoran_list":restoran_list}
 			template = "user-interfaces/updatemakanan.html"
 			return render(request, template, context)
 		else:
