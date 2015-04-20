@@ -16,10 +16,13 @@
 							{% for f in food_list %}
 							<tr>
 								<td>Restoran:</td>
-								<td>
+								<td>	{% if in restoran_list %}
 									<select name="restoran">
-							  		<option value="{{f.id}}">{{f.restoran}}</option>
+										{% for x in restoran_list %}
+							  		<option value="{{x.id}}">{{x.nama_restoran}}</option>
+										{% endfor %}
 									</select>
+									{% endif %}
 								</td>
 							</tr>
 							<tr>
