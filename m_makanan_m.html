@@ -1,0 +1,38 @@
+
+{%extends "base/base_sekretariat.html" %}
+
+{% block content %}
+{% if food_list %}
+			<br><br>
+				<div class="row">
+				  <div class="col-md-12">
+					<div class="table-responsive">
+					<center><h1>Kelola Menu Makanan</h1>
+					{{notifikasi}}
+					</center>
+						<br>
+						<table border=1 class="table">
+							<tr>
+								<th><b>No</b></th>
+								<th><b>Nama Makanan</b></th>
+								<th><b>Restoran</b></th>
+								<th><b>Total Rating</b></th>
+								<th colspan="2"></th>
+							</tr>
+							{% for f in food_list %}
+							<tr>
+								<td>{{forloop.counter}}</td>
+								<td>{{f.nama_makanan}}</td>
+								<td>{{f.restoran}}</td>
+								<td>{{f.total_rating}}</td>
+								<td><form action='/view/food/update/' method='POST'>{% csrf_token %}<button type="submit" class="btn btn-warning" name="edit" value='{{f.id}}'>Edit</button></form></td>
+								<td><form method='POST' action='/view/food/delete/'>{% csrf_token %}<button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin?')" name="delete" value='{{f.id}}'>Delete</button></form></td>
+							</tr>
+							{% endfor %}
+						</table>
+					</div>
+				  </div>
+				</div>
+{% endif %}
+{% endblock %}
+
