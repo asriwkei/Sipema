@@ -9,18 +9,20 @@
 					<div class="col-md-12">
 					<div class="table-responsive">
 					<center><h1>Ubah Menu Makanan</h1>
+					{{notifikasi}}
 					</center>
 					<form action='/view/food/updatesave/' method='POST'> {% csrf_token %}
-					<form>
 						<table class="table">
 							{% for f in food_list %}
 							<tr>
 								<td>Restoran:</td>
-								<td>	{% if in restoran_list %}
+								<td>
+									{% if restoran_list %}
 									<select name="restoran">
 										{% for x in restoran_list %}
-							  		<option value="{{x.id}}">{{x.nama_restoran}}</option>
-										{% endfor %}
+							  			<option value='{{x.id}}' {% if restoran %} selected="{{x.restoran}}"{% endif %}>
+							  			{{x.nama_restoran}}</option>
+							  			{%  endfor %}
 									</select>
 									{% endif %}
 								</td>
@@ -31,13 +33,15 @@
 									<input type="text" name="nama_makanan" value="{{f.nama_makanan}}">
 								<td>
 							</tr>
-							{% endfor %}
 						</table>
 						<center>
-						<button type='submit' class="btn btn-primary" onclick="return confirm('Apakah Anda yakin?')" name="simpan" value="simpan">Simpan</button> 
-						<button type='submit' class="btn btn-default" name="batal" value="batal">Batal</button>
+						<button type='submit' class="btn btn-primary" onclick="return confirm('Apakah Anda yakin?')" name="simpan" value="{{f.id}}">Simpan</button> {% endfor %}	
+						</form>
+						<br>
+						<form action='/view/manage/food/' method=''> {% csrf_token %}<button type='submit' class="btn btn-default" name="batal" value="batal">Batal</button>
+						</form>
 						</center>
-					</form>
+				
 
 {% endif %}
 {% endblock %}
